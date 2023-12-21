@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 
@@ -14,9 +15,14 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "rekam_medis")
-public class RekamMedis {
+public class RekamMedis extends BaseEntity{
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     private String idRekamMedis;
 
     @ManyToOne
@@ -39,15 +45,4 @@ public class RekamMedis {
     @Column(name = "catatan_medis")
     private String catatanMedis;
 
-    @Column(name = "created_at")
-    private String createdAt;
-
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(name = "updated_at")
-    private String updatedAt;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
 }

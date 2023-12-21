@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "dokter")
-public class Dokter {
+public class Dokter extends BaseEntity{
 
     @Id
     @Column(name = "id_dokter")
@@ -34,18 +35,6 @@ public class Dokter {
 
     @Column(name = "token_expired_at")
     private Long tokenExpiredAt;
-
-    @Column(name = "created_at")
-    private String createdAt;
-
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(name = "updated_at")
-    private String updatedAt;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
 
     @OneToMany(mappedBy = "dokter")
     private List<RekamMedis> rekamMedis;

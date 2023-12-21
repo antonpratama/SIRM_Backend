@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
 import java.util.List;
@@ -15,9 +16,14 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "pasien")
-public class Pasien {
+public class Pasien extends BaseEntity{
 
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Column(name = "id_pasien")
     private String idPasien;
 
@@ -37,18 +43,6 @@ public class Pasien {
 
     @Column(name = "foto_pasien")
     private byte[] fotoPasien;
-
-    @Column(name = "created_at")
-    private String createdAt;
-
-    @Column(name = "created_by")
-    private String createdBy;
-
-    @Column(name = "updated_at")
-    private String updatedAt;
-
-    @Column(name = "updated_by")
-    private String updatedBy;
 
     @OneToMany(mappedBy = "pasien")
     private List<RekamMedis> rekamMedis;
