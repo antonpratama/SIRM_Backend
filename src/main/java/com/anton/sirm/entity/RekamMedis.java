@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,11 +24,8 @@ public class RekamMedis extends BaseEntity{
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
+    @Column(name = "id_rekam_medis")
     private String idRekamMedis;
-
-    @ManyToOne
-    @JoinColumn(name = "id_resep_obat", referencedColumnName = "id_resep_obat")
-    private ResepObat resepObat;
 
     @ManyToOne
     @JoinColumn(name = "id_pasien", referencedColumnName = "id_pasien")
@@ -44,5 +42,8 @@ public class RekamMedis extends BaseEntity{
 
     @Column(name = "catatan_medis")
     private String catatanMedis;
+
+    @OneToMany(mappedBy = "rekamMedis")
+    private List<ResepObat> resepObat;
 
 }

@@ -40,13 +40,12 @@ public class RekamMedisService {
 
     @Transactional
     public RekamMedisResponse create(Dokter dokter, Pasien pasien,
-                                     ResepObat resepObat, CreateRekamMedisRequest request){
+                                     CreateRekamMedisRequest request){
         validationService.validate(request);
 
         RekamMedis rekamMedis = new RekamMedis();
         rekamMedis.setDokter(dokter);
         rekamMedis.setPasien(pasien);
-        rekamMedis.setResepObat(resepObat);
         rekamMedis.setTanggalPemeriksaan(request.getTanggalPemeriksaan());
         rekamMedis.setDiagnosa(request.getDiagnosa());
         rekamMedis.setCatatanMedis(request.getCatatanMedis());
@@ -65,7 +64,7 @@ public class RekamMedisService {
     }
 
     public RekamMedisResponse update(Dokter dokter, Pasien pasien,
-                                     ResepObat resepObat, UpdateRekamMedisRequest request){
+                                     UpdateRekamMedisRequest request){
         validationService.validate(request);
 
         RekamMedis rekamMedis = rekamMedisRepository.findById(request.getIdRekamMedis())
@@ -73,7 +72,6 @@ public class RekamMedisService {
 
         rekamMedis.setDokter(dokter);
         rekamMedis.setPasien(pasien);
-        rekamMedis.setResepObat(resepObat);
         rekamMedis.setTanggalPemeriksaan(request.getTanggalPemeriksaan());
         rekamMedis.setDiagnosa(request.getDiagnosa());
         rekamMedis.setCatatanMedis(rekamMedis.getCatatanMedis());

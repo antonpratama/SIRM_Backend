@@ -30,8 +30,9 @@ public class ResepObat extends BaseEntity{
     @JoinColumn (name = "id_obat", referencedColumnName = "id_obat")
     private Obat obat;
 
-    @Column(name = "id_rekam_medis")
-    private String idRekamMedis;
+    @ManyToOne
+    @JoinColumn(name = "id_rekam_medis", referencedColumnName = "id_rekam_medis")
+    private RekamMedis rekamMedis;
 
     @Column(name = "jumlah_obat")
     private int jumlahObat;
@@ -39,6 +40,4 @@ public class ResepObat extends BaseEntity{
     @Column(name = "instruksi_penggunaan")
     private String instruksiPenggunaan;
 
-    @OneToMany(mappedBy = "resep_obat")
-    private List<RekamMedis> rekamMedis;
 }

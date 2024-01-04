@@ -1,6 +1,7 @@
 package com.anton.sirm.service;
 
 import com.anton.sirm.entity.Obat;
+import com.anton.sirm.entity.RekamMedis;
 import com.anton.sirm.entity.ResepObat;
 import com.anton.sirm.model.CreateResepObatRequest;
 import com.anton.sirm.model.ResepObatResponse;
@@ -30,11 +31,12 @@ public class ResepObatService {
     }
 
     @Transactional
-    public ResepObatResponse create(Obat obat, CreateResepObatRequest request){
+    public ResepObatResponse create(Obat obat, RekamMedis rekamMedis, CreateResepObatRequest request){
         validationService.validate(request);
 
         ResepObat resepObat = new ResepObat();
         resepObat.setObat(obat);
+        resepObat.setRekamMedis(rekamMedis);
         resepObat.setJumlahObat(request.getJumlahObat());
         resepObat.setInstruksiPenggunaan(request.getInstruksiPenggunaan());
 
@@ -51,7 +53,7 @@ public class ResepObatService {
         return toResepObatResponse(resepObat);
     }
 
-    public ResepObatResponse update(Obat obat, UpdateResepObatRequest request){
+    public ResepObatResponse update(Obat obat, RekamMedis rekamMedis, UpdateResepObatRequest request){
         validationService.validate(request);
 
         ResepObat resepObat = resepObatRepository.findById(request.getIdResepObat())
@@ -60,6 +62,7 @@ public class ResepObatService {
         resepObat.setJumlahObat(resepObat.getJumlahObat());
         resepObat.setInstruksiPenggunaan(resepObat.getInstruksiPenggunaan());
         resepObat.setObat(obat);
+        resepObat.setRekamMedis(rekamMedis);
         resepObatRepository.save(resepObat);
 
         return toResepObatResponse(resepObat);

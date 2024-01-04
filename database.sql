@@ -54,12 +54,12 @@ CREATE TABLE resep_obat (
     updated_time DATETIME NOT NULL,
     updated_by VARCHAR(100) NOT NULL,
     PRIMARY KEY (id_resep_obat),
-    FOREIGN KEY fk_id_obat (id_obat) REFERENCES obat(id_obat)
+    FOREIGN KEY fk_id_obat (id_obat) REFERENCES obat(id_obat),
+    FOREIGN KEY fk_id_rekam_medis (id_rekam_medis) REFERENCES rekam_medis(id_rekam_medis)
 ) ENGINE InnoDB;
 
 CREATE TABLE rekam_medis (
     id_rekam_medis VARCHAR(100) NOT NULL ,
-    id_resep_obat VARCHAR(100) NOT NULL ,
     id_pasien VARCHAR(100) NOT NULL ,
     id_dokter VARCHAR(100) NOT NULL ,
     tanggal_pemeriksaan DATE NOT NULL ,
@@ -71,6 +71,5 @@ CREATE TABLE rekam_medis (
     updated_by VARCHAR(100) NOT NULL,
     PRIMARY KEY (id_rekam_medis),
     FOREIGN KEY fk_id_pasien (id_pasien) REFERENCES pasien(id_pasien),
-    FOREIGN KEY fk_id_dokter (id_dokter) REFERENCES dokter(id_dokter),
-    FOREIGN KEY fk_id_resep_obat (id_resep_obat) REFERENCES resep_obat(id_resep_obat)
+    FOREIGN KEY fk_id_dokter (id_dokter) REFERENCES dokter(id_dokter)
 ) ENGINE InnoDB;
